@@ -52,3 +52,11 @@ keymap.set("n", "<C-n>", "<cmd> :!tmux split-window -h && cd %:p:h <CR><CR>", {d
 
 --open current file in finder
 keymap.set("n", "<cmd>open", "<cmd>:!open . <CR>", {desc = "Open In Finder"}) --Open In Finder
+
+
+--override jump to mark using leader instead of apostrophe
+local opts = { desc = "Mark-related bindings", noremap = true, silent = true}
+keymap.set("n", "<leader>m", function()
+  local char = vim.fn.getcharstr() -- Get the next character (mark)
+  vim.cmd("normal! '" .. char .. "zz") -- Jump to the mark and center
+end, opts)
